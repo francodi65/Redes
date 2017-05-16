@@ -1,0 +1,82 @@
+!
+version 12.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname Router
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+ipv6 unicast-routing
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ ip address 192.168.50.10 255.255.255.0
+ ipv6 address 2001:AAAA:CCCC::1/64
+ ipv6 ospf 4 area 0 
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ ip address 10.0.50.2 255.255.255.248
+ ipv6 address 2001:CCCC:CCCC::2/64
+ ipv6 ospf 4 area 0
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 10.0.50.1
+ipv6 route ::/0 2001:CCCC:CCCC::1
+!
+ip flow-export version 9
+!
+!
+ipv6 router ospf 4
+ router-id 4.4.4.4
+ log-adjacency-changes
+!
+router ospf 4
+ log-adjacency-changes
+ network 192.168.50.0 255.255.255.0 area 0
+ network 10.0.50.0 255.255.255.248 area 0
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+
