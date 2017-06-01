@@ -35,11 +35,12 @@ spanning-tree mode pvst
 !
 !
 interface FastEthernet0/0
- ip address 192.168.30.10 255.255.255.0
+ ip address 192.168.30.1 255.255.255.0
  ipv6 address 2001:AAAA:BBBB::1/64
  ipv6 ospf 2 area 0
  duplex auto
  speed auto
+ no shutdown
 !
 interface FastEthernet0/1
  ip address 10.0.30.2 255.255.255.248
@@ -47,6 +48,7 @@ interface FastEthernet0/1
  ipv6 ospf 2 area 0
  duplex auto
  speed auto
+ no shutdown
 !
 interface Vlan1
  no ip address
